@@ -1,0 +1,266 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mavuno Fresh</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}">
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!--fonts-->
+<link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!--//fonts-->	
+<!-- js -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<!-- js -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-select.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
+</script>
+<script type="text/javascript" src="{% static 'js/jquery.leanModal.min.js' %}"></script>
+<link href="{% static 'css/jquery.uls.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/jquery.uls.grid.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/jquery.uls.lcd.css' %}" rel="stylesheet"/>
+<!-- Source -->
+<script src="{% static 'js/jquery.uls.data.js' %}"></script>
+<script src="{% static 'js/jquery.uls.data.utils.js' %}"></script>
+<script src="{% static 'js/jquery.uls.lcd.js' %}"></script>
+<script src="{% static 'js/jquery.uls.languagefilter.js' %}"></script>
+<script src="{% static 'js/jquery.uls.regionfilter.js' %}"></script>
+<script src="{% static 'js/jquery.uls.core.js' %}"></script>
+
+    <script src="{% static 'js/tabs.js' %}"></script>
+	
+<script type="text/javascript">
+$(document).ready(function () {    
+var elem=$('#container ul');      
+	$('#viewcontrols a').on('click',function(e) {
+		if ($(this).hasClass('gridview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('list').addClass('grid');
+				$('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+				$('#viewcontrols .gridview').addClass('active');
+				$('#viewcontrols .listview').removeClass('active');
+				elem.fadeIn(1000);
+			});						
+		}
+		else if($(this).hasClass('listview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('grid').addClass('list');
+				$('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+				$('#viewcontrols .gridview').removeClass('active');
+				$('#viewcontrols .listview').addClass('active');
+				elem.fadeIn(1000);
+			});									
+		}
+	});
+});
+</script>
+</head>
+<body>
+<div class="header">
+		<div class="container">
+			<div class="logo">
+				<a href="{% url 'mavuno:home' %}"><span>Mavuno</span>Fresh</a>
+			</div>
+
+		</div>
+</div>
+	<div class="banner text-center">
+	  <div class="container">    
+			<h1>Sell or Buy   <span class="segment-heading">    Your Farm Products </span> with Us</h1>
+			<p>No need of taking your products to the market sell for free here</p>
+			{% comment %} <a href="post-ad.html">Post For Free </a> {% endcomment %}
+	  </div>
+	</div>
+	<!-- Products -->
+	<div class="total-ads main-grid-border">
+		<div class="container">
+
+			<div class="all-categories">
+				<h3> Select your category and find the perfect ad</h3>
+				<ul class="all-cat-list">
+					{% for item in categories %}
+						<li><a href="{{item.get_absolute_url}}">{{item.name}} <span class="num-of-ads"></span></a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<ol class="breadcrumb" style="margin-bottom: 5px;">
+			  <li><a href="{% url 'mavuno:home' %}">Home</a></li>
+			  <li class="active">All Ads</li>
+			</ol>
+			<div class="ads-grid">
+				<div class="side-bar col-md-3">
+					<div class="search-hotel">
+					<h3 class="sear-head">Name contains</h3>
+					<form>
+						<input type="text" value="Product name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+						<input type="submit" value=" ">
+					</form>
+				</div>
+				
+
+	
+				</div>
+				<div class="ads-display col-md-9">
+					<div class="wrapper">					
+					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+					  <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+						<li role="presentation" class="active">
+						  <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+							<span class="text">All Ads</span>
+						  </a>
+						</li>
+
+
+					  </ul>
+					  <div id="myTabContent" class="tab-content">
+						<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+						   <div>
+												<div id="container">
+					        
+							<ul class="list">
+						
+								{% for item in products %}
+									<a href="{{item.get_absolute_url}}">
+										<li>
+											<img src="{{item.image.url}}" title="" alt="" />
+											<section class="list-left">
+											<h5 class="title">{{item.name}}</h5>
+											<span class="adprice">KSH {{item.price}}</span>
+											<p class="catpath">{{item.category}}</p>
+											</section>
+											<section class="list-right">
+											<span class="date">{{item.updated | naturaltime}}</span>
+											<span class="cityname">{{itme.location}}</span>
+											</section>
+											<div class="clearfix"></div>
+										</li> 
+									</a>
+								{% empty %}	
+									<h3>No products at the moment. Please add them</h3>
+								{% endfor %}
+							</ul>
+						</div>
+							</div>
+						</div>
+
+					{% include "pagination.html" with page=products %}
+
+
+					  </div>
+					</div>
+				</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>	
+	</div>
+	<!-- // Products -->
+	<!--footer section start-->		
+		<footer>
+			<div class="footer-top">
+				<div class="container">
+					<div class="foo-grids">
+						<div class="col-md-3 footer-grid">
+							<h4 class="footer-head">Who We Are</h4>
+							<p>Mavuno-Fresh management system is a web application system that seeks to offer a farm produce online purchasing 
+								platform to customers.  Due to the increased demand of farm products country wide,
+								  the system has been proposed for online purchasing.  </p>
+							
+						</div>
+						<div class="col-md-3 footer-grid">
+							<h4 class="footer-head">Help</h4>
+							<ul>
+							
+								<li><a href="#">Faq</a></li>
+								<li><a href="#l">Feedback</a></li>
+								
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid">
+							<h4 class="footer-head">Information</h4>
+							<ul>
+								
+								<li><a href="#">Terms of Use</a></li>
+								
+								<li><a href="#">Privacy Policy</a></li>	
+							</ul>
+						</div>
+						<div class="col-md-3 footer-grid">
+							<h4 class="footer-head">Contact Us</h4>
+							<span class="hq">Our headquarters</span>
+							<address>
+								<ul class="location">
+									<li><span class="glyphicon glyphicon-map-marker"></span></li>
+									<li>CENTER FOR FINANCIAL ASSISTANCE TO DEPOSED NIGERIAN ROYALTY</li>
+									<div class="clearfix"></div>
+								</ul>	
+								<ul class="location">
+									<li><span class="glyphicon glyphicon-earphone"></span></li>
+									<li>+0 561 111 235</li>
+									<div class="clearfix"></div>
+								</ul>	
+								<ul class="location">
+									<li><span class="glyphicon glyphicon-envelope"></span></li>
+									<li><a href="mailto:info@mavunofresh.com">info@mavunofresh.com</a></li>
+									<div class="clearfix"></div>
+								</ul>						
+							</address>
+						</div>
+						<div class="clearfix"></div>
+					</div>						
+				</div>	
+			</div>	
+			<div class="footer-bottom text-center">
+			<div class="container">
+				<div class="footer-logo">
+					<a href="{% url 'mavuno:home' %}"><span>Mavuno</span>Fresh</a>
+				</div>
+				<div class="footer-social-icons">
+					<ul>
+						<li><a class="facebook" href="#"><span>Facebook</span></a></li>
+						<li><a class="twitter" href="#"><span>Twitter</span></a></li>
+						<li><a class="flickr" href="#"><span>Flickr</span></a></li>
+						<li><a class="googleplus" href="#"><span>Google+</span></a></li>
+						<li><a class="dribbble" href="#"><span>Dribbble</span></a></li>
+					</ul>
+				</div>
+				<div class="copyrights">
+					<p> © 2022 Mavuno Fresh. All Rights Reserved </p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		</footer>
+        <!--footer section end-->
+</body>
+</html>
