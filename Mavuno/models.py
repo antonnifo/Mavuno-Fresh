@@ -7,6 +7,13 @@ from django.utils import timezone
 from hitcount.models import HitCount
 from taggit.managers import TaggableManager
 
+
+
+class AvailableManager(models.Manager):
+    def get_queryset(self):
+        return super(AvailableManager,
+                     self).get_queryset().filter(available=True)
+
 class BaseContent(models.Model):
   
     publish  = models.DateTimeField(default=timezone.now)            
@@ -35,7 +42,11 @@ class Category(BaseContent):
 
 
 class Product(BaseContent):
+    
+    objects = models.Manager() # The default manager.
+    is_available   = AvailableManager()
     tags = TaggableManager()
+
     category    = models.ForeignKey(Category,
                     related_name='products',
                             on_delete=models.CASCADE)
@@ -43,7 +54,8 @@ class Product(BaseContent):
     slug        = models.SlugField(max_length=200, db_index=True)
     image       = models.ImageField(upload_to='products/%Y/%m/%d',
                                  blank=True)
-    seller      = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_products')                             
+    seller      = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_products')  
+    phone       = models.CharField(max_length=200, db_index=True)                           
     description = RichTextUploadingField()
     price       = models.DecimalField(max_digits=10, decimal_places=2)
     location    = models.CharField(max_length=200, db_index=True)
